@@ -1,3 +1,5 @@
+still need to impliment favourites and change of quantity when pressing buy
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

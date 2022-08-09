@@ -24,3 +24,9 @@ export const getProductById = async (id) => {
 
     return { id: rawDoc.id, ...rawDoc.data() };
 };
+
+export const updateProduct = async (id, record) => {
+    const collectionRef = firestore.collection("gym");
+    const docRef = collectionRef.doc(id);
+    await docRef.update(record);
+};

@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../../services/products";
 import styles from "./ProductPage.module.scss";
+import { updateProduct } from "../../services/products";
 
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [favorite, setFavorite] = useState([]);
-    // const [quantity, setQuantity] = useState(0);
+    const [favourite, setFavourite] = useState(false);
+    const [sizeSelect, setSizeSelect] = useState(0);
+    const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         getProductById(id)
@@ -17,14 +19,31 @@ const ProductPage = () => {
             .finally(() => setLoading(false));
     }, [id]);
 
+    useEffect(() => {
+        const partial = {
+            favourited: !favourite,
+        };
+
+        const wrapper = async () => {
+            await updateProduct(product.id, partial);
+        };
+
+        wrapper();
+    }, [favourite]);
+
     // const handleChange = (event) => {
     //     console.log(event.target.size);
     // };
 
-    const addToFavorite = (id) => {
-        if (!favorite.includes(id)) setFavorite(favorite.concat(id));
-        console.log(id);
+    const onChange = (e) => {
+        setSizeSelect(e.target.value);
     };
+
+    const changeFavourite = () => {
+        setFavourite(!favourite);
+    };
+
+    console.log(favourite);
 
     return (
         <>
@@ -45,7 +64,7 @@ const ProductPage = () => {
                             <h2 className={styles.ProductPrice}>
                                 ${product.price}
                             </h2>
-                            {product.size === undefined ? (
+                            {/* {product.size === undefined ? (
                                 <></>
                             ) : product.size.length === 5 ? (
                                 <>
@@ -54,7 +73,7 @@ const ProductPage = () => {
                                 <button>{product.size[2]}</button>
                                 <button>{product.size[3]}</button>
                                 <button>{product.size[4]}</button> */}
-                                    <select name="selection" id="selection">
+                            {/* <select name="selection" id="selection">
                                         <option value="XS">
                                             {product.size[0]}
                                         </option>
@@ -73,11 +92,11 @@ const ProductPage = () => {
                                     </select>
                                 </>
                             ) : product.size ? (
-                                <>
-                                    {/* <button>{product.size[0]}</button>
+                                <> */}
+                            {/* <button>{product.size[0]}</button>
                                 <button>{product.size[1]}</button>
                                 <button>{product.size[2]}</button> */}
-                                    <select name="selection" id="selection">
+                            {/* <select name="selection" id="selection">
                                         <option value="S">
                                             {product.size[0]}
                                         </option>
@@ -91,11 +110,23 @@ const ProductPage = () => {
                                 </>
                             ) : (
                                 <p></p>
-                            )}
-                            <p>Quantity: {product.quantity}</p>
-                            <button onClick={() => addToFavorite(product.id)}>
-                                Favorite
+                            )} */}
+                            <select onChange={onChange}>
+                                {product.size &&
+                                    product.size.map((p, i) => {
+                                        return <option value={i}>{p}</option>;
+                                    })}
+                            </select>
+                            <p>
+                                Quantity Available:{" "}
+                                {product.quantity[sizeSelect]}
+                            </p>
+                            <button onClick={() => product.quantity - 1}>
+                                Buy
                             </button>
+                            <p>{favourite}</p>
+
+                            <button onClick={changeFavourite}>Favorite</button>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Quo libero facere dolorum
