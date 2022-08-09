@@ -8,6 +8,7 @@ const ProductPage = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState([]);
+    const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         getProductById(id)
@@ -61,6 +62,7 @@ const ProductPage = () => {
                         <button onClick={() => addToFavorite(product.id)}>
                             add to favorite
                         </button>
+                        <p>{product.quantity}</p>
                     </div>
                 </div>
             )}
