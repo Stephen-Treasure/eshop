@@ -1,0 +1,45 @@
+import React, { Component } from "react";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import styles from "./Carousel.module.scss";
+
+export default class SimpleSlider extends Component {
+    render() {
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+        };
+        return (
+            <div>
+                <Slider {...settings}>
+                    <div>
+                        <img
+                            src="https://cdn.shopify.com/s/files/1/0965/9006/products/00_2e6bf15b-67f4-4fd2-9ed1-badcb1cdfe85.jpg?v=1659415793"
+                            style={{ width: "100vh", height: "400px" }}
+                            alt=""
+                        />
+                    </div>
+                    <div>
+                        <img
+                            src="https://cdn.shopify.com/s/files/1/0965/9006/products/00_cca899ba-fe1d-4d40-80e5-9e0c10890514.jpg?v=1659416882"
+                            alt=""
+                            style={{ width: "100vh", height: "400px" }}
+                        />
+                    </div>
+                    <div>
+                        <img
+                            src="https://cdn.shopify.com/s/files/1/0965/9006/products/04_3cf1d345-ab7f-435d-b6c7-0d54126e779b_1024x1024.jpg?v=1659415483"
+                            alt=""
+                            style={{ width: "100vh", height: "400px" }}
+                        />
+                    </div>
+                </Slider>
+            </div>
+        );
+    }
+}
