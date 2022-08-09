@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getProductById } from "../../services/products";
 import styles from "./ProductPage.module.scss";
 import { updateProduct } from "../../services/products";
+import { addFavourite } from "../../services/products";
+import { useNavigate as navigate } from "react-router-dom";
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -11,7 +13,7 @@ const ProductPage = () => {
     const [loading, setLoading] = useState(true);
     const [favourite, setFavourite] = useState(false);
     const [sizeSelect, setSizeSelect] = useState(0);
-    const [quantity, setQuantity] = useState(0);
+    // const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         getProductById(id)
@@ -29,6 +31,8 @@ const ProductPage = () => {
         };
 
         wrapper();
+        // .addFavourite(product.isFavourited)
+        // .then(() => navigate("/favourites"));
     }, [favourite]);
 
     // const handleChange = (event) => {
@@ -111,15 +115,23 @@ const ProductPage = () => {
                             ) : (
                                 <p></p>
                             )} */}
-                            <select onChange={onChange}>
-                                {product.size &&
-                                    product.size.map((p, i) => {
-                                        return <option value={i}>{p}</option>;
-                                    })}
-                            </select>
+                            {product.size === undefined ? (
+                                <></>
+                            ) : (
+                                <select onChange={onChange}>
+                                    {product.size &&
+                                        product.size.map((p, i) => {
+                                            return (
+                                                <option value={i}>{p}</option>
+                                            );
+                                        })}
+                                </select>
+                            )}
                             <p>
                                 Quantity Available:{" "}
-                                {product.quantity[sizeSelect]}
+                                {product.quantity[sizeSelect] === undefined
+                                    ? product.quantity
+                                    : product.quantity[sizeSelect]}
                             </p>
                             <button onClick={() => product.quantity - 1}>
                                 Buy

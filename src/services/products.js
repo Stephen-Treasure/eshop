@@ -1,3 +1,4 @@
+import ProductCard from "../components/ProductCard/ProductCard";
 import { firestore } from "./firestore";
 
 export const getProdcuts = async () => {
@@ -29,4 +30,14 @@ export const updateProduct = async (id, record) => {
     const collectionRef = firestore.collection("gym");
     const docRef = collectionRef.doc(id);
     await docRef.update(record);
+};
+
+export const addFavourite = async (favourite) => {
+    if (favourite == true) {
+    }
+
+    const collectionRef = firestore.collection("gym");
+
+    const addFav = await collectionRef.add(favourite);
+    return addFav;
 };
