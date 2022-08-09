@@ -1,8 +1,27 @@
 .ProductName {
     text-align: left;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .ProductPrice {
     text-align: left;
+    text-decoration: none;
+}
+
+.ProductImage {
+    width: 200px;
+    height: 250px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.ProductCard {
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(212, 210, 210);
+}
+
+.ProductCard:hover {
+    box-shadow: 5px 5px 5px 5px red;
 }

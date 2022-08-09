@@ -15,7 +15,7 @@ function App() {
                     path="/"
                     element={
                         <div className="App">
-                            <h1>Mock Website </h1>
+                            <h1 className="Title">Gym Accessories</h1>
                             <SimpleSlider />
                             <ProductList />
                         </div>

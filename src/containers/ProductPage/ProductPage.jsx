@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../../services/products";
+import styles from "./ProductPage.module.scss";
 
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState([]);
-    const [quantity, setQuantity] = useState(0);
+    // const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         getProductById(id)
@@ -31,38 +32,78 @@ const ProductPage = () => {
                 <h1>Loading</h1>
             ) : (
                 <div>
-                    <div>
+                    <div className={styles.ProductPage}>
                         <img
+                            className={styles.ProductImage}
                             src={product.image}
                             alt=""
-                            style={{ width: "500px" }}
                         />
-                        <h1>{product.name}</h1>
-                        <h2>${product.price}</h2>
-                        {product.size === undefined ? (
-                            <></>
-                        ) : product.size.length === 5 ? (
-                            <>
-                                <button>{product.size[0]}</button>
+                        <div className={styles.ProductInfo}>
+                            <h1 className={styles.ProductTitle}>
+                                {product.name}
+                            </h1>
+                            <h2 className={styles.ProductPrice}>
+                                ${product.price}
+                            </h2>
+                            {product.size === undefined ? (
+                                <></>
+                            ) : product.size.length === 5 ? (
+                                <>
+                                    {/* <button>{product.size[0]}</button>
                                 <button>{product.size[1]}</button>
                                 <button>{product.size[2]}</button>
                                 <button>{product.size[3]}</button>
-                                <button>{product.size[4]}</button>
-                            </>
-                        ) : product.size ? (
-                            <>
-                                {" "}
-                                <button>{product.size[0]}</button>
+                                <button>{product.size[4]}</button> */}
+                                    <select name="selection" id="selection">
+                                        <option value="XS">
+                                            {product.size[0]}
+                                        </option>
+                                        <option value="S">
+                                            {product.size[1]}
+                                        </option>
+                                        <option value="M">
+                                            {product.size[2]}
+                                        </option>
+                                        <option value="L">
+                                            {product.size[3]}
+                                        </option>
+                                        <option value="XL">
+                                            {product.size[4]}
+                                        </option>
+                                    </select>
+                                </>
+                            ) : product.size ? (
+                                <>
+                                    {/* <button>{product.size[0]}</button>
                                 <button>{product.size[1]}</button>
-                                <button>{product.size[2]}</button>
-                            </>
-                        ) : (
-                            <p></p>
-                        )}
-                        <button onClick={() => addToFavorite(product.id)}>
-                            add to favorite
-                        </button>
-                        <p>{product.quantity}</p>
+                                <button>{product.size[2]}</button> */}
+                                    <select name="selection" id="selection">
+                                        <option value="S">
+                                            {product.size[0]}
+                                        </option>
+                                        <option value="M">
+                                            {product.size[1]}
+                                        </option>
+                                        <option value="L">
+                                            {product.size[2]}
+                                        </option>
+                                    </select>
+                                </>
+                            ) : (
+                                <p></p>
+                            )}
+                            <p>Quantity: {product.quantity}</p>
+                            <button onClick={() => addToFavorite(product.id)}>
+                                Favorite
+                            </button>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Quo libero facere dolorum
+                                neque blanditiis officia tenetur atque quaerat
+                                animi, esse illum dolores ipsa culpa facilis
+                                repudiandae ad, porro, asperiores excepturi!
+                            </p>
+                        </div>
                     </div>
                 </div>
             )}

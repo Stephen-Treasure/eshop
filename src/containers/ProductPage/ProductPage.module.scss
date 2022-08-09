@@ -1,0 +1,40 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ProductPage {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(238, 238, 238);
+}
+
+.ProductImage {
+    margin-top: 200px;
+    width: 600px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.ProductTitle {
+    margin: 10px;
+}
+
+.ProductPrice {
+    margin: 10px;
+}
+
+.ProductQuantity {
+    margin: 10px;
+}
+
+.ProductInfo {
+    margin-top: 200px;
+    margin-left: 10px;
+
+    background-color: rgb(238, 238, 238);
+}
+
+.ProductButton {
+    margin: 10px;
+}

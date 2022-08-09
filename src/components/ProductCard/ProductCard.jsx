@@ -7,15 +7,11 @@ const ProductCard = (props) => {
     return (
         <NavLink to={`/products/${product.id}`}>
             <div>
-                <div>
+                <div className={styles.ProductCard}>
                     <img
+                        className={styles.ProductImage}
                         src={product.image}
                         alt=""
-                        style={{
-                            width: "200px",
-                            height: "250px",
-                            borderRadius: "10px",
-                        }}
                     />
                     <p className={styles.ProductName}>{product.name}</p>
                     <p className={styles.ProductPrice}>{product.price}</p>
